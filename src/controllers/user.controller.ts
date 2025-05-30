@@ -100,7 +100,7 @@ export default class UserController {
 
   static async updatePasswordUpdate(req: Request, res: Response): Promise<any> {
     try {
-
+      
       const { id, oldPassword, newPassword } = req.body;
 
       const user = await User.findByPk(id);

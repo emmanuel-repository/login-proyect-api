@@ -34,7 +34,7 @@ export class AuthMiddleware {
       const lastActivity = new Date(session.last_activity_time);
       const diff = (now.getTime() - lastActivity.getTime()) / 1000;
 
-      if (diff > 10) {
+      if (diff > 3600) {
         await session.destroy();
         res.status(440).json({ message: 'Sesion expiro por Inactividad' });
         return;

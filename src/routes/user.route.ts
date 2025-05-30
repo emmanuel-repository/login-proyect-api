@@ -9,7 +9,7 @@ const router = Router()
 router.get('/user', AuthMiddleware.authenticate, UserController.getAllRegistrer);
 router.get('/user/:id', AuthMiddleware.authenticate, UserController.getRegisterById);
 router.post('/user', validate(createUserSchema), AuthMiddleware.authenticate, UserController.createRegister);
-router.post('/user/editPasswor', validate(updateUserPasswordSchema), AuthMiddleware.authenticate, UserController.createRegister);
+router.post('/user/editPassword', validate(updateUserPasswordSchema), AuthMiddleware.authenticate, UserController.updatePasswordUpdate);
 router.put('/user/:id', validate(updateUserSchema) ,AuthMiddleware.authenticate, UserController.updateRegister);
 router.delete('/user/:id', AuthMiddleware.authenticate, UserController.deleteRegister);
 
