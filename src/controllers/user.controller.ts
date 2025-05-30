@@ -90,7 +90,32 @@ export default class UserController {
 
       await user.destroy();
 
-      res.json({ id: user.id  });
+      res.json({ id: user.id });
+
+    } catch (error) {
+      console.error('Login error:', error);
+      return res.status(500).json({ message: 'Internal server error' });
+    }
+  }
+
+  static async updatePasswordUpdate(req: Request, res: Response): Promise<any> {
+    try {
+
+      const { id, oldPassword, newPassword } = req.body;
+
+      const user = await User.findByPk(id);
+
+      if (!user) return res.status(404).json({ message: 'No encontrado' });
+
+      const isMatch = await bcrypt.compare(oldPassword, user.password_hash);
+
+      if (!isMatch) return res.status(441).json({ message: 'Contraseña anterior no coincide' });
+      
+      const password_hash = await bcrypt.hash(newPassword, 10);
+
+      await user.update({ password_hash });
+
+      return res.json({ id: user.id, message: "Se actualizo la contraseña correctamente"});
 
     } catch (error) {
       console.error('Login error:', error);

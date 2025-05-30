@@ -17,3 +17,9 @@ export const updateUserSchema = z.object({
   email: z.string().email({ message: 'Invalid email format' }),
   role: z.string()
 });
+
+export const updateUserPasswordSchema = z.object({
+  id: z.number(),
+  oldPassword: z.string(),
+  newPassword: z.string(),
+});
